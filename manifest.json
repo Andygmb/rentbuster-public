@@ -1,0 +1,37 @@
+{
+  "name": "Huurpunten Berekenen",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "description": "[WIP] Calculates the amount of points you get for a house based.",
+  "default_locale": "en",
+  "action": {
+    "default_icon": {             
+      "16": "icons/icon16.png",  
+      "48": "icons/icon48.png",  
+      "128": "icons/icon128.png"   
+    },
+    "default_title": "Calculate points",   
+    "default_popup": "src/page_action/page_action.html" 
+  },
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "permissions": [ "activeTab" ],
+  "host_permissions": [
+    "https://www.funda.nl/*",
+    "https://bagviewer.kadaster.nl/lvbag/bag-viewer/api/*",
+    "https://geodata.nationaalgeoregister.nl/locatieserver/v3/*",
+    "https://www.wozwaardeloket.nl/*",
+    "https://www.ep-online.nl/Energylabel/Search",
+    "https://monumentenregister.cultureelerfgoed.nl/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.funda.nl/huur/*"],
+      "js": ["injectors/funda.js"]
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["*://*.funda.nl/*"]
+  }
+}
